@@ -1,0 +1,368 @@
+/*GENRAL*/
+:root{
+	--contrast-color: white;
+	--background-color: #eeeeee;
+	--main-color: #f98d03;
+	--darker-color: #924e32;
+	--transition-slow: 1s ease-in-out;
+	--opacity-transition: opacity 1s ease;
+	--transition-change-color: color 1s ease;
+
+	--shadow-normal : 20px 20px 25px black;
+	--shadow-color : black
+}
+
+body, html{
+	height: 100%;
+	margin: 0;
+	align-items: center;
+}
+
+body{
+	font-size: 25px;
+	overflow-x: hidden;
+	background-image: url(../imgs/contact_background.jpg);
+	background-size: cover;
+	background-color :#e38e29;
+	background-blend-mode: screen;
+}
+
+body > *{
+	z-index: 0;
+}
+html.block-scroll{
+	height: 100%;
+	overflow: hidden;
+}
+h1{
+	font-family: "Biome Light";
+	font-size: 40px;
+}
+.h2_contact{
+	font-family: 'Staatliches', cursive;
+	font-size:70px;
+	background: linear-gradient(to left, red, blue,orange);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+}
+a:hover{
+	color:#fa9800;
+}
+.centered{
+	text-align: center;
+}
+.left_div{
+	margin-top:20%;
+	margin-left:60%;
+}
+.right_div{
+	margin-left:5%;
+}
+.special_p{
+	font-family: 'Raleway', sans-serif;
+	font-size:20px;
+}
+/*HEADER*/
+header{
+	background-color: var(--main-color);
+	height: 60px;
+	margin-bottom: 20px;
+}
+
+header svg, #menu-icon{
+	position: absolute;
+}
+
+h1#main-title{
+    color: var(--contrast-color);
+    font-size: 40px;
+    padding-top: 15px;
+    padding-left: 80px;
+}
+
+/*ICONE DU MENU (animation etc.)*/
+#main-icon{
+    width: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#menu-icon{
+	right: 10px;
+	top: 25px;
+	z-index: 1;
+}
+
+#menu-icon g, #menu-icon line{
+	transition: 1s ease-in-out;
+}
+
+#menu-icon:hover{
+	cursor: pointer;
+}
+
+#menu-icon.menu-clicked #upper-line{
+	transform: rotate(40deg) scaleX(2) translateY(-2px);
+}
+
+#menu-icon.menu-clicked #bottom-line{
+	transform: rotate(-40deg) translateX(-20px) translateY(-4px) scaleX(2);
+}
+
+#menu-icon.menu-clicked #middle-line{
+	transform: rotate(90deg);
+}
+
+/*MENU*/
+#menu{
+	transition: height 1s ease;
+	pointer-events: none;
+	overflow: hidden;
+	z-index: 1;
+	color: var(--contrast-color);
+	padding-top: 20px;
+	position: absolute;
+	top: 60px;
+	height: 0;
+	box-sizing: border-box;
+	background-color: var(--main-color);
+	width: 100%;
+}
+
+#menu.menu-clicked{
+	pointer-events: painted;
+	visibility: visible;
+	height: 200px;
+}
+
+#menu > nav > ul{
+	width: 100%;
+	list-style-type: none;
+	display: flex;
+	align-content: space-between;
+}
+
+#menu > nav > ul > li{
+	text-align: center;
+	width: 50%;
+}
+
+.menu-item span{
+	transition: var(--transition-change-color);
+}
+
+.menu-item span:hover, .menu-item span.menu-clicked{
+	color: gray;
+	cursor: pointer;
+}
+
+.menu-item span + ul{
+	text-align: left;
+	margin-left: 10px;
+	border-left: 2px solid grey;
+	overflow: hidden;
+	transition: max-height 1s ease;
+	padding-top: 10px;
+	padding-left: 50px;
+	line-height: 40px;
+	max-height: 0;
+}
+
+.menu-item span:hover + ul, .menu-item span + ul:hover, .menu-item span.menu-clicked + ul{
+	max-height: 200px;
+}
+
+/*MAIN*/
+img#background-image{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	height: 100vh;
+	width: 100vw;
+}
+
+.main-content{
+	padding-top: 40px;
+}
+
+main{
+	margin-bottom: 70px;
+}
+
+main > section{
+	padding: 40px;
+	margin-left: 30px;
+	background-color: #eeeeee;
+	box-shadow: var(--shadow-normal);
+}
+
+main p.introduction{
+	font-size: 28px;
+	text-align: center;
+	line-height: 40px;
+	animation: fade-out 2s ease;
+	-moz-animation: fade-out 2s ease;
+	-webkit-animation: fade-out 2s ease;
+	margin-bottom: 50px;
+}
+
+main > section > h2{
+	text-align: center;
+	font-size: 38px;
+	font-weight: bold;
+	margin-bottom: 40px;
+}
+
+/*formulaire recherche*/
+form button{
+	color: white;
+	background-color: var(--main-color);
+	border-radius: 5px;
+	padding: 10px;
+	border-top: none;
+	border-left: none;
+}
+
+form label{
+	display: block;
+}
+
+form button:hover, form button:focus{
+	border-right: none;
+	border-bottom: none;
+	border-top: 2px solid black;
+	border-left: 2px solid black;
+	background-color: var(--darker-color);
+}
+
+form > *{
+	margin-bottom: 50px;
+}
+
+form input, form select{
+	width: 80%;
+	border: 0;
+	outline: 0;
+	border-radius: 320px;
+	padding: 16px;
+	text-shadow: 1px 1px 0 white;
+	box-shadow: inset 2px 2px 5px var(--shadow-color), -3px -3px 10px var(--background-color);
+	box-sizing: border-box;
+	transition: box-shadow 0.5s ease-in-out;
+	-webkit-transition: box-shadow 0.5s ease-in-out;
+	margin: 10px;
+}
+
+form input:focus, form select:focus{
+	box-shadow:  inset 1px 1px 2px var(--shadow-color), inset -1px -1px 2px var(--background-color);
+}
+
+form select{
+	width: 60%;
+}
+
+form option{
+	text-align-last: center;
+}
+
+/*ASIDE*/
+aside > section{
+	background-color: var(--background-color);
+	padding: 20px;
+	border-radius: 20px 0 0 20px;
+	box-shadow: var(--shadow-normal);
+}
+
+/*POUR LES SMARTPHONES ET TABLETTES*/
+@media only screen and (max-width: 660px) {
+	header{
+		height: 50px;
+		margin-bottom: 20px;
+	}
+
+	#main-icon{
+		height: 35px;
+	}
+	
+	#menu-icon{
+		right: 10px;
+		top: 20px;
+	}
+
+	h1#main-title{
+        font-size: 30px;
+	}
+
+	#menu{
+		top: 50px;
+		height: 0;
+		background-color: var(--main-color);
+		width: 100%;
+	}
+
+	.menu-item span+ ul{
+		max-height: 200px;
+		margin-top: 50px;;
+	}
+
+	#menu.menu-clicked{
+		height: 100%;
+		overflow: hidden;
+	}
+
+	#menu > nav > ul{
+		display: block;
+		width: 100%;
+		margin-top: 10%;
+	}
+
+	#menu > nav > ul > li{
+		width: 100%;
+		margin-bottom: 25vh;
+		position: relative;
+	}
+
+	.inner-menu{
+		position: absolute;
+	}
+
+	main > section{
+		margin-left: 4%;
+		margin-right: 4%;
+	}
+}
+
+/*ANIMATIONS*/
+/*fade-out (apparition)*/
+@keyframes fade-out{
+	from{ opacity: 0; }
+	to{ opacity: 1; }
+}
+
+@-moz-keyframes fade-out{
+	from{ opacity: 0; }
+	to{ opacity: 1; }
+}
+
+@-webkit-keyframes fade-out{
+	from{ opacity: 0; }
+	to{ opacity: 1; }
+}
+
+/*zoom (taille 0 vers taille normale)*/
+@keyframes zoom{
+	from{ trasform: scale(0); }
+	to{ trasform: scale(1); }
+}
+
+@-moz-keyframes zoom{
+	from{ trasform: scale(0); }
+	to{ trasform: scale(1); }
+}
+
+@-webkit-keyframes zoom{
+	from{ trasform: scale(0); }
+	to{ trasform: scale(1); }
+}
