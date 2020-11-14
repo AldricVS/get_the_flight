@@ -18,16 +18,15 @@ if(isset($_POST['login-conn']) && isset($_POST['password-conn'])){
     $password = mysqli_real_escape_string($db,htmlspecialchars($_POST['password-conn']));
     
     if($username !== "" && $password !== ""){
-        $requete = "SELECT password FROM Utilisateur WHERE login='" . $username . "'";
+        $requete = "SELECT mot_de_passe FROM Utilisateur WHERE login='" . $username . "'";
         $exec_requete = mysqli_query($db,$requete);
         //si il y a une erreur, renvoie FALSE
         if(!$exec_requete){
             echo "Utilisateur inconnu";
         }else{
             $reponse = mysqli_fetch_array($exec_requete);
-        
             // nom d'utilisateur et mot de passe correctes
-            if(password_verify($_POST['password-conn'], $reponse['password']) || $reponse['password'] != ""){
+            if(password_verify($password, $reponse['mot_de_passe'])){
                 session_start();
                 //on indique que l'on est connecté
                 $_SESSION['username'] = $username;

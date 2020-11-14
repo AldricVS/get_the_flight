@@ -41,13 +41,18 @@ h1{
 .h2_contact{
 	font-family: 'Staatliches', cursive;
 	font-size:70px;
-	background: linear-gradient(to left, red, blue,orange);
+	background: linear-gradient(to right, #f9ae03,#ae03f9,#03f9f2);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 
 }
 a:hover{
-	color:#fa9800;
+	background: #03e9f4;
+	color: #fff;
+	box-shadow: 0 0 5px #03e9f4,
+				0 0 25px #03e9f4,
+				0 0 50px #03e9f4,
+				0 0 100px #03e9f4;
 }
 .centered{
 	text-align: center;

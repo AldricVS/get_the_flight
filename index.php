@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('./includes/header.inc_index.php');
 ?>
 
@@ -6,88 +7,66 @@ include('./includes/header.inc_index.php');
 
 <img id="background-image" src="imgs/background-image-flou.png" alt="arrière plan" />
 
-<div id="pop-up-login" class="pop-up pop-up-background">
-	<div class="pop-up pop-up-foreground centered">
-		<svg class="close-pop-up" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 100 100">
-			<line x1="0" y1="0" x2="100" y2="100" stroke="black" stroke-width="10" />
-			<line x1="0" y1="100" x2="100" y2="0" stroke="black" stroke-width="10" />
-		</svg>
-		<h3>Connexion</h3>
-		<label for="login-conn">Identifiant <input type="text" name="login-conn" id="login-conn" maxlength="50" required/></label>
-		<label for="password-conn">Mot de passe<input type="password" name="password-conn" id="password-conn" maxlength="72" required/></label>
-		<button type="button" id="button-connection">Se connecter</button>
-		<div class="loading not-visible">
-			<div></div>
-		</div>
-		<div class="result" style="color: red;"></div>
-	</div>
-</div>
-
-<div id="pop-up-inscription" class="pop-up pop-up-background">
-	<div class="pop-up pop-up-foreground centered">
-		<svg class="close-pop-up" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 100 100">
-			<line x1="0" y1="0" x2="100" y2="100" stroke="black" stroke-width="10" />
-			<line x1="0" y1="100" x2="100" y2="0" stroke="black" stroke-width="10" />
-		</svg>
-		<h3>Inscription</h3>
-		<label for="login-inscription">Identifiant <input type="text" name="login-inscription" id="login-inscription" maxlength="50" required/></label>
-		<label for="email-inscription">Adresse e-mail <input type="mail" name="email-inscription" id="email-inscription" maxlength="80" required/></label>
-		<label for="password-inscription">Mot de passe<input type="password" name="password-inscription" id="password-inscription" maxlength="72" required/></label>
-		<label for="passwordConfirm-inscription">Confirmer le mot de passe<input type="password" name="passwordConfirm-inscription" id="passwordConfirm-inscription" maxlength="72" required/></label>
-		<button type="button" id="button-inscription">S'inscrire</button>
-		<div class="loading not-visible">
-			<div></div>
-		</div>
-		<div class="result" style="color: red;"></div>
-	</div>
-</div>
-
 <div class="row main-content">
 	<main class="col-md-9">
 		<section>
 			<p class="introduction">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tellus ante, sollicitudin a ex vitae, consectetur convallis diam. Maecenas fringilla mattis varius. Cras sit amet eleifend purus.</p>
 			<h2>Rechercher un vol</h2>
-			<form class="centered">
+			<form class="centered" onsubmit="return searchFlights();">
 				<div class="row">
 					<!--Partie gauche du formulaire-->
 					<div class="col-md-6">
-						<label for="lieu-depart">Départ</label>
+						<label class="input_label" for="lieu-depart">Départ</label>
 						<div id="depart-group">
-							<input type="text" id="lieu-depart" name="lieu-depart" required />
+							<input type="text" class="airport-search" list="lieu-depart-results" id="lieu-depart" name="lieu-depart" required />
+							<datalist id="lieu-depart-results">
+							</datalist>
 							<button type="button">Trouver avec ma position</button>
 						</div>
 					</div>
 					<!--Partie droite du formulaire-->
 					<div class="col-md-6">
-						<label for="arrivee">Arrivée</label>
-						<input type="text" id="arrivee" name="arrivee" required />
+						<label class="input_label" for="arrivee">Arrivée</label>
+						<input type="text" list="arrivee-results" id="arrivee" class="airport-search" name="arrivee" required />
+						<datalist id="arrivee-results">
+						</datalist>
 					</div>
-				</div>
-				<div id="compagny">
-					<label for="compagnie-combobox" style="display:inline;">Compagnie aerienne</label>
-					<select name="compagnie" id="compagnie-combobox">
-						<option value="0">N'importe laquelle</option>
-						<option value="Air France">Air France</option>
-						<option value="Easyjet">Easyjet</option>
-						<option value="Ryanair">Ryanair</option>
-					</select>
 				</div>
 				<div class="row">
 					<!--Partie gauche du formulaire-->
 					<div class="col-md-6">
-						<label for="date-debut">Du</label>
+						<label class="select_label" for="date-debut">Du</label>
 						<!--Mettre date et heure d'ajd-->
 						<input type="date" id="date-debut" name="date-debut" required />
 					</div>
 					<!--Partie droite du formulaire-->
 					<div class="col-md-6">
-						<label for="date-fin">Au</label>
+						<label class="select_label" for="date-fin">Au</label>
 						<!--Mettre dans une heure-->
 						<input type="date" id="date-fin" name="date-fin" required />
 					</div>
 				</div>
 				<button type="submit">Rechercher les vols</button>
 
+				<div id="flights">
+					<div class="loading"></div>
+					<div class="row">
+						<p class="col-md-8" id="number-flights">Nombre de réultats : 20</p>
+						<div class="col-md-4">
+							<!-- !! Listener onCheck nécéssaire-->
+							<input type="checkbox" id="fav-checkbox" name="fav-checkbox" />
+							<label for="fav-checkbox"></label>
+						</div>
+					</div>
+					<div class="flight_result">
+						<img src="imgs/plane.svg" alt="logo" class="logo-result"/>
+						<p class="result-date">Date</p>
+						<p><span class="result-airport-begin">horaires départ</span> ⇨ <span class="result-airport-end">horaires arrivée</span></p>
+						<p><span class="result-timetable-begin">horaires départ</span> ⇨ <span class="result-timetable-end">horaires arrivée</span></p>
+						<p><span class="result-compagny">Compagnie aérienne</span></p>
+						<button type="button">Sauvegarder ce vol</button>
+					</div>
+				</div>
 			</form>
 		</section>
 	</main>
@@ -108,6 +87,8 @@ include('./includes/header.inc_index.php');
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 <script src="javascript/menu.js"></script>
 <script src="javascript/user.js"></script>
+<script src="javascript/searchFields.js"></script>
+<script src="javascript/flightsResults.js"></script>
 </body>
 
 </html>

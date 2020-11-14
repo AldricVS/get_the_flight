@@ -2,14 +2,26 @@
 :root{
 	--contrast-color: white;
 	--background-color: #eeeeee;
-	--main-color: #b66646;
+	--main-color: #f98d03;
 	--darker-color: #924e32;
 	--transition-slow: 1s ease-in-out;
 	--opacity-transition: opacity 1s ease;
 	--transition-change-color: color 1s ease;
 
 	--shadow-normal : 20px 20px 25px black;
-	--shadow-color : black
+	--shadow-color : black;
+
+	--color-gradient-1: #c25e0d;
+	--color-gradient-2: #e09039;
+
+	--color-title-gradient-1: #380036;
+	--color-title-gradient-2: #047F7F;
+
+	--glow-color: #fe5907;
+
+	/*#b83e0d
+	  #A40606
+	*/
 }
 
 body, html{
@@ -35,7 +47,9 @@ h1{
 	font-family: "Biome Light";
 	font-size: 40px;
 }
-
+p{
+	font-family: 'PT Sans Narrow', sans-serif;
+}
 a.undecored, a.undecored:hover{
 	text-align: center;
 	text-decoration: none;
@@ -94,7 +108,7 @@ a.button:hover{
 
 /*HEADER*/
 header{
-	background-color: var(--main-color);
+	background: linear-gradient(to right, var(--color-gradient-1), var(--color-gradient-2));
 	height: 60px;
 	margin-bottom: 20px;
 }
@@ -156,7 +170,7 @@ h1#main-title{
 	top: 60px;
 	height: 0;
 	box-sizing: border-box;
-	background-color: var(--main-color);
+	background: linear-gradient(to right,var(--color-gradient-1), var(--color-gradient-2));
 	width: 100%;
 }
 
@@ -203,8 +217,13 @@ h1#main-title{
 
 /*POP-UP*/
 .pop-up h3{
+	background: linear-gradient(to right, var(--color-title-gradient-1), var(--color-title-gradient-2));
+	font-family: 'Space Grotesk', sans-serif;
 	margin-bottom: 20px;
 	font-weight: bold;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .pop-up.pop-up-background{
@@ -227,7 +246,7 @@ h1#main-title{
 
 .pop-up-foreground{
 	padding: 20px;
-	background-color: var(--contrast-color);
+	background:linear-gradient(to right,var(--color-gradient-1), var(--color-gradient-2));
 	border-radius: 5px;
 	position: absolute;
 	top: 30%;
@@ -257,6 +276,10 @@ h1#main-title{
 	
 }
 
+.result{
+	text-shadow: var(--shadow-normal);
+}
+
 /*MAIN*/
 img#background-image{
 	position: fixed;
@@ -278,7 +301,7 @@ main{
 main > section{
 	padding: 40px;
 	margin-left: 30px;
-	background-color: #eeeeee;
+	background: linear-gradient(to right,var(--color-gradient-1),var(--color-gradient-2));
 	box-shadow: var(--shadow-normal);
 }
 
@@ -294,53 +317,75 @@ main p.introduction{
 
 main > section > h2{
 	text-align: center;
-	font-size: 38px;
-	font-weight: bold;
+	font-size: 45px;
 	margin-bottom: 40px;
+	font-family: 'Space Grotesk', sans-serif;
+	background: linear-gradient(to right, var(--color-title-gradient-1), var(--color-title-gradient-2));
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 /*formulaire recherche*/
 button{
 	color: white;
-	background-color: var(--main-color);
+	background: linear-gradient(to right, #aa3323,#c43f28);
 	border-radius: 5px;
 	padding: 10px;
 	border-top: none;
 	border-left: none;
+	font-family: 'Space Grotesk', sans-serif;
 }
 
 label{
 	display: block;
 }
 
-button:hover, form button:focus{
-	border-right: none;
-	border-bottom: none;
-	border-top: 2px solid black;
-	border-left: 2px solid black;
-	background-color: var(--darker-color);
+button:hover{
+  background: #7a1414;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: none;
+  border-bottom: none;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px var(--glow-color),
+              0 0 25px var(--glow-color),
+              0 0 50px var(--glow-color),
+              0 0 100px var(--glow-color);
 }
 
-form > *{
+form > div{
+	margin-bottom: 50px;
+}
+
+button{
 	margin-bottom: 50px;
 }
 
 input, select{
-	width: 80%;
-	border: 0;
-	outline: 0;
-	border-radius: 320px;
-	padding: 16px;
-	text-shadow: 1px 1px 0 white;
-	box-shadow: inset 2px 2px 5px var(--shadow-color), -3px -3px 10px var(--background-color);
-	box-sizing: border-box;
-	transition: box-shadow 0.5s ease-in-out;
-	-webkit-transition: box-shadow 0.5s ease-in-out;
-	margin: 10px;
+	width: 100%;
+	padding: 10px 0;
+	font-size: 20px;
+	color: black;
+	margin-bottom: 40px;
+	border: none;
+	border-bottom: 1px solid #fff;
+	outline: none;
+	background: transparent;
+	text-align: center;
 }
 
-input:focus, select:focus{
-	box-shadow:  inset 1px 1px 2px var(--shadow-color), inset -1px -1px 2px var(--background-color);
+.input_label{
+	font-size: 28px;
+	font-family: 'Space Grotesk', sans-serif;
+	color: #fff;
+}
+
+.select_label{
+	font-size: 28px;
+	font-family: 'Space Grotesk', sans-serif;
+	color: #fff;
 }
 
 select{
@@ -353,10 +398,74 @@ option{
 
 /*ASIDE*/
 aside > section{
-	background-color: var(--background-color);
+	background-color: var(--color-gradient-2);
 	padding: 20px;
 	border-radius: 20px 0 0 20px;
 	box-shadow: var(--shadow-normal);
+}
+
+/*RESULTATS VOLS*/
+/*#flights > div{
+	margin: 20px;
+	margin-left: 0;
+	width: 100%;
+	height: 300px;
+	border-top: 2px solid white;
+}*/
+
+input#fav-checkbox{
+    display: none;
+}
+
+div#flights input#fav-checkbox + label::before{
+    cursor: pointer;
+    content: "★";
+}
+
+div#flights input#fav-checkbox:checked + label::before{
+    content: "⭐";
+}
+
+.flight_result {
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+	background-color :#fabd85;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.flight_result > *{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.flight_result > button{
+	margin-top: 25px;
+	margin-bottom: 10px;
+}
+
+#flights p#number-flights{
+	text-align: left;
+	font-size: 25px;
+	margin-bottom: 40px;
+	font-family: 'Space Grotesk', sans-serif;
+	background: linear-gradient(to right, var(--color-title-gradient-1), var(--color-title-gradient-2));
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+img.logo-result{
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	width: 40px;
+	transform: rotate(90deg);
+	transition: transform 0.2s ease-out;
+}
+
+.flight_result:hover > img.logo-result{
+	transform: rotate(0deg);
 }
 
 /*POUR LES SMARTPHONES ET TABLETTES*/
@@ -382,7 +491,7 @@ aside > section{
 	#menu{
 		top: 50px;
 		height: 0;
-		background-color: var(--main-color);
+		background: linear-gradient(to right,var(--color-gradient-1), var(--color-gradient-2));
 		width: 100%;
 	}
 
@@ -404,6 +513,7 @@ aside > section{
 
 	#menu > nav > ul > li{
 		width: 100%;
+		height: 50%;
 		margin-bottom: 25vh;
 		position: relative;
 	}
@@ -418,6 +528,10 @@ aside > section{
 	}
 
 	.pop-up-foreground{
+		width: 100%;
+	}
+
+	select{
 		width: 100%;
 	}
 }

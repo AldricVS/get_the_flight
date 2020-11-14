@@ -37,7 +37,7 @@ $("#button-connection").click(function () {
             buttonConnection.siblings(".result").html(data);
             //si la connexion  est réussie, on recharge la page afin que php puisse "apercevoir" l'utilisateur
             if(data == "Connexion réussie"){
-                Location.reload();
+                document.location.reload();
             }
         });
     }
@@ -94,7 +94,7 @@ $("#button-inscription").click(function () {
                 buttonConnection.siblings(".loading").addClass("not-visible");
                 buttonConnection.siblings(".result").html(data);
                 if (data == "Inscription réussie") {
-                    Location.reload(true);
+                    document.location.reload();
                 }
             });
     }

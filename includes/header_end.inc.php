@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="icon" type="image/png" href="favicon.ico">
-	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, height=device-height">
-
-	<title>Get the flight ! - Accueil</title>
-
-	
 </head>
 
 <body>
@@ -67,4 +50,50 @@
 				</ul>
 			</nav>
 		</div>
-	</header>
+    </header>
+<body>
+<?php
+    if (!isset($_SESSION["username"])) :
+?>
+	<div id="pop-up-login" class="pop-up pop-up-background">
+		<div class="pop-up pop-up-foreground centered">
+			<svg class="close-pop-up" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 100 100">
+				<line x1="0" y1="0" x2="100" y2="100" stroke="black" stroke-width="10" />
+				<line x1="0" y1="100" x2="100" y2="0" stroke="black" stroke-width="10" />
+			</svg>
+			<h3>Connexion</h3>
+
+			<label class="input_label" for="login-conn">Identifiant <input type="text" name="login-conn" id="login-conn" maxlength="50" required /></label>
+			<label class="input_label" for="password-conn">Mot de passe<input type="password" name="password-conn" id="password-conn" maxlength="72" required /></label>
+			<button type="button" id="button-connection">Se connecter</button>
+
+			<div class="loading not-visible">
+				<div></div>
+			</div>
+			<div class="result"></div>
+		</div>
+	</div>
+
+	<div id="pop-up-inscription" class="pop-up pop-up-background">
+		<div class="pop-up pop-up-foreground centered">
+			<svg class="close-pop-up" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 100 100">
+				<line x1="0" y1="0" x2="100" y2="100" stroke="black" stroke-width="10" />
+				<line x1="0" y1="100" x2="100" y2="0" stroke="black" stroke-width="10" />
+			</svg>
+			<h3>Inscription</h3>
+
+			<label class="input_label" for="login-inscription">Identifiant <input type="text" name="login-inscription" id="login-inscription" maxlength="50" required /></label>
+			<label class="input_label" for="email-inscription">Adresse e-mail <input type="mail" name="email-inscription" id="email-inscription" maxlength="80" required /></label>
+			<label class="input_label" for="password-inscription">Mot de passe<input type="password" name="password-inscription" id="password-inscription" maxlength="72" required /></label>
+			<label class="input_label" for="passwordConfirm-inscription">Confirmer le mot de passe<input type="password" name="passwordConfirm-inscription" id="passwordConfirm-inscription" maxlength="72" required /></label>
+			<button type="button" id="button-inscription">S'inscrire</button>
+
+			<div class="loading not-visible">
+				<div></div>
+			</div>
+			<div class="result"></div>
+		</div>
+	</div>
+<?php
+endif;
+?>
