@@ -14,8 +14,8 @@
 	--color-gradient-1: #c25e0d;
 	--color-gradient-2: #e09039;
 
-	--color-title-gradient-1: #380036;
-	--color-title-gradient-2: #047F7F;
+	--color-title-gradient-1: #ebebeb;
+	--color-title-gradient-2: #c5c5c5;
 
 	--glow-color: #fe5907;
 
@@ -28,6 +28,8 @@ body, html{
 	height: 100%;
 	margin: 0;
 	align-items: center;
+	color: white;
+	font-family: 'Space Grotesk', sans-serif;
 }
 
 body{
@@ -50,6 +52,11 @@ h1{
 p{
 	font-family: 'PT Sans Narrow', sans-serif;
 }
+
+table{
+	text-align: center;
+}
+
 a.undecored, a.undecored:hover{
 	text-align: center;
 	text-decoration: none;
@@ -81,6 +88,10 @@ a.button:hover{
 
 .centered{
 	text-align: center;
+}
+
+.empty-space{
+	margin-bottom: 30px;
 }
 
 /*Loading animation*/
@@ -247,7 +258,6 @@ h1#main-title{
 .pop-up-foreground{
 	padding: 20px;
 	background:linear-gradient(to right,var(--color-gradient-1), var(--color-gradient-2));
-	border-radius: 5px;
 	position: absolute;
 	top: 30%;
 	left: 50%;
@@ -280,6 +290,9 @@ h1#main-title{
 	text-shadow: var(--shadow-normal);
 }
 
+#suppression_pop_up_text{
+	padding: 25px;
+}
 /*MAIN*/
 img#background-image{
 	position: fixed;
@@ -318,7 +331,8 @@ main p.introduction{
 main > section > h2{
 	text-align: center;
 	font-size: 45px;
-	margin-bottom: 40px;
+	margin-bottom: 50px;
+	padding: 10px;
 	font-family: 'Space Grotesk', sans-serif;
 	background: linear-gradient(to right, var(--color-title-gradient-1), var(--color-title-gradient-2));
 	background-clip: text;
@@ -370,10 +384,18 @@ input, select{
 	color: black;
 	margin-bottom: 40px;
 	border: none;
-	border-bottom: 1px solid #fff;
 	outline: none;
+	border-bottom: 1px solid #fff;
 	background: transparent;
 	text-align: center;
+}
+
+input::placeholder{
+	color: rgba(0, 0, 0, 200);
+}
+
+input[type="date"]{
+	color: rgba(0, 0, 0, 110);
 }
 
 .input_label{
@@ -400,8 +422,8 @@ option{
 aside > section{
 	background-color: var(--color-gradient-2);
 	padding: 20px;
-	border-radius: 20px 0 0 20px;
 	box-shadow: var(--shadow-normal);
+	margin-bottom: 20px;
 }
 
 /*RESULTATS VOLS*/
@@ -429,7 +451,7 @@ div#flights input#fav-checkbox:checked + label::before{
 .flight_result {
     border-top: 2px solid white;
     border-bottom: 2px solid white;
-	background-color :#fabd85;
+	background-color :rgb(96, 6, 3);
 	position: relative;
 	margin-bottom: 10px;
 }
@@ -461,6 +483,7 @@ img.logo-result{
 	left: 10px;
 	width: 40px;
 	transform: rotate(90deg);
+	color: white;
 	transition: transform 0.2s ease-out;
 }
 

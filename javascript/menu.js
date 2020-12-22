@@ -18,9 +18,21 @@ $("#menu-icon").on("click", function(){
 	}
 });
 
-/*Boutons d'ouverture / fermeture des pop-ups (connexion / inscription)*/
+/*Boutons d'ouverture / fermeture des pop-ups (connexion / inscription / suppresion favori)*/
 $("#login-popup-button").on("click", function(){
 	$("#pop-up-login").addClass("visible");
+});
+
+$("#Suppression-popup-button").on("click", function(){
+	$("#pop-up-suppression").addClass("visible");
+});
+
+//si l'utilisateur clique sur un des boutons "Supprimer" des vols (sur la page "vols-sauvegardes")
+//faire apparaitre le pop-up et renseigner le numéro du vol sauvegardé
+$(".supp-vol-button").click(function(e){
+    var popUp = $("#pop-up-supp-vol");
+    popUp.addClass("visible");
+    popUp.find("input:hidden").val($(this).siblings("input:hidden").val());
 });
 
 $("#inscription-popup-button").on("click", function(){

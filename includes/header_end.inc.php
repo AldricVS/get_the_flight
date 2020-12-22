@@ -24,7 +24,7 @@
 						?>
 							<span class="menu-relative"><?= $_SESSION["username"] ?></span>
 							<ul class="menu-relative inner-menu">
-								<li class="menu-relative"><a href="favoris.php">Favoris</a></li>
+								<li class="menu-relative"><a href="favori.php">Favoris</a></li>
 								<li class="menu-relative"><a href="vols-sauvegardes.php">Vols sauvegardés</a></li>
 								<li class="menu-relative"><a href="deconnection.php">Déconnexion</a></li>
 							</ul>
@@ -43,15 +43,14 @@
 					<li class="menu-item menu-relative">
 						<span class="menu-relative">Divers</span>
 						<ul class="menu-relative inner-menu">
-							<li class="menu-relative"><a href="./php/page_contact.php">À propos des créateurs du site</a></li>
-							<li class="menu-relative">Sources et références</li>
+							<li class="menu-relative"><a href="./page_contact.php">À propos des créateurs du site</a></li>
+							<li class="menu-relative"><a href="./aeroports.php">Aéroports supportés</a></li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 		</div>
     </header>
-<body>
 <?php
     if (!isset($_SESSION["username"])) :
 ?>
@@ -83,7 +82,7 @@
 			<h3>Inscription</h3>
 
 			<label class="input_label" for="login-inscription">Identifiant <input type="text" name="login-inscription" id="login-inscription" maxlength="50" required /></label>
-			<label class="input_label" for="email-inscription">Adresse e-mail <input type="mail" name="email-inscription" id="email-inscription" maxlength="80" required /></label>
+			<label class="input_label" for="email-inscription">Adresse e-mail <input type="email" name="email-inscription" id="email-inscription" maxlength="80" required /></label>
 			<label class="input_label" for="password-inscription">Mot de passe<input type="password" name="password-inscription" id="password-inscription" maxlength="72" required /></label>
 			<label class="input_label" for="passwordConfirm-inscription">Confirmer le mot de passe<input type="password" name="passwordConfirm-inscription" id="passwordConfirm-inscription" maxlength="72" required /></label>
 			<button type="button" id="button-inscription">S'inscrire</button>

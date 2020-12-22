@@ -1,5 +1,5 @@
 <?php
-require_once("class/connection_bd.class.php");
+require_once("../php/class/connection_bd.class.php");
 
 function startsWith($string, $substring){
     $strLength = strlen($substring);

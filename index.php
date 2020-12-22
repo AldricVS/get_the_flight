@@ -1,34 +1,51 @@
 <?php
 session_start();
-include('./includes/header.inc_index.php');
+require_once('./includes/header_begin.inc.php');
+?>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+<title>Get the flight ! - Accueil</title>
+<?php
+require_once('./includes/header_end.inc.php');
 ?>
 
-<!--PARTIE PRINCIPALE-->
-
 <img id="background-image" src="imgs/background-image-flou.png" alt="arrière plan" />
+
+<div id="pop-up-save-confirm" class="pop-up pop-up-background">
+	<div class="pop-up pop-up-foreground centered">
+		<svg class="close-pop-up" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 100 100">
+			<line x1="0" y1="0" x2="100" y2="100" stroke="black" stroke-width="10" />
+			<line x1="0" y1="100" x2="100" y2="0" stroke="black" stroke-width="10" />
+		</svg>
+		<div class="loading not-visible">
+			<div></div>
+		</div>
+		<div class="result" style="padding: 10px;"></div>
+	</div>
+</div>
 
 <div class="row main-content">
 	<main class="col-md-9">
 		<section>
-			<p class="introduction">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tellus ante, sollicitudin a ex vitae, consectetur convallis diam. Maecenas fringilla mattis varius. Cras sit amet eleifend purus.</p>
+			<p class="introduction">Notre site vous permet de rechercher des vols rapidement et dans toute la France métropolitaine. Choisissez un aéroport de départ, un d'arrivée, choisissez une plage horaire et ça y est !</p>
+			<p class="introduction">Nous vous souhaitons une bonne visite sur Get the flight !</p>
 			<h2>Rechercher un vol</h2>
-			<form class="centered" onsubmit="return searchFlights();">
+			<form class="centered" id="search-flight-from">
 				<div class="row">
 					<!--Partie gauche du formulaire-->
 					<div class="col-md-6">
 						<label class="input_label" for="lieu-depart">Départ</label>
 						<div id="depart-group">
-							<input type="text" class="airport-search" list="lieu-depart-results" id="lieu-depart" name="lieu-depart" required />
-							<datalist id="lieu-depart-results">
+							<input type="text" class="airport-search" list="lieu-depart-results" id="lieu-depart" name="lieu-depart" placeholder="Nom de l'aéroport..." required />
+							<datalist class="airport-datalist" id="lieu-depart-results">
 							</datalist>
-							<button type="button">Trouver avec ma position</button>
 						</div>
 					</div>
 					<!--Partie droite du formulaire-->
 					<div class="col-md-6">
 						<label class="input_label" for="arrivee">Arrivée</label>
-						<input type="text" list="arrivee-results" id="arrivee" class="airport-search" name="arrivee" required />
-						<datalist id="arrivee-results">
+						<input type="text" list="arrivee-results" id="arrivee" class="airport-search" name="arrivee" placeholder="Nom de l'aéroport..." required />
+						<datalist class="airport-datalist" id="arrivee-results">
 						</datalist>
 					</div>
 				</div>
@@ -36,35 +53,22 @@ include('./includes/header.inc_index.php');
 					<!--Partie gauche du formulaire-->
 					<div class="col-md-6">
 						<label class="select_label" for="date-debut">Du</label>
-						<!--Mettre date et heure d'ajd-->
 						<input type="date" id="date-debut" name="date-debut" required />
 					</div>
 					<!--Partie droite du formulaire-->
 					<div class="col-md-6">
 						<label class="select_label" for="date-fin">Au</label>
-						<!--Mettre dans une heure-->
 						<input type="date" id="date-fin" name="date-fin" required />
 					</div>
 				</div>
-				<button type="submit">Rechercher les vols</button>
+				<button type="submit" id="search-flights-button">Rechercher les vols</button>
 
 				<div id="flights">
-					<div class="loading"></div>
-					<div class="row">
-						<p class="col-md-8" id="number-flights">Nombre de réultats : 20</p>
-						<div class="col-md-4">
-							<!-- !! Listener onCheck nécéssaire-->
-							<input type="checkbox" id="fav-checkbox" name="fav-checkbox" />
-							<label for="fav-checkbox"></label>
-						</div>
+					<div class="loading not-visible">
+						<div></div>
 					</div>
-					<div class="flight_result">
-						<img src="imgs/plane.svg" alt="logo" class="logo-result"/>
-						<p class="result-date">Date</p>
-						<p><span class="result-airport-begin">horaires départ</span> ⇨ <span class="result-airport-end">horaires arrivée</span></p>
-						<p><span class="result-timetable-begin">horaires départ</span> ⇨ <span class="result-timetable-end">horaires arrivée</span></p>
-						<p><span class="result-compagny">Compagnie aérienne</span></p>
-						<button type="button">Sauvegarder ce vol</button>
+					<div class="result">
+
 					</div>
 				</div>
 			</form>
@@ -76,19 +80,23 @@ include('./includes/header.inc_index.php');
 			<h2>Vols populaires</h2>
 			<p>Un vol sera affiché à la fois, et il y aura une modification toutes les 30 secondes</p>
 		</section>
+		<?php
+		if (isset($_SESSION["username"])) :
+		?>
+			<section>
+				<p>Bienvenue, <?= $_SESSION["username"] ?> !</p>
+			</section>
+		<?php
+		endif;
+		?>
 	</aside>
 </div>
-
-<!--FOOTER-->
-<footer>
-
-</footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 <script src="javascript/menu.js"></script>
 <script src="javascript/user.js"></script>
-<script src="javascript/searchFields.js"></script>
-<script src="javascript/flightsResults.js"></script>
+<script src="javascript/search.js"></script>
+<script src="javascript/save.js"></script>
 </body>
 
 </html>
