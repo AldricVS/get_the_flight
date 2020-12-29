@@ -29,7 +29,7 @@
 
             parent::searchOCAI();
 
-            //vérifi si on a bien les informations principal pour commencé une requete
+            //vérifie si on a bien les informations principales pour commencer une requête
             if(parent::getisReady()){
 
                 //mise en place de l'url de l'api avec les paramettre voulu

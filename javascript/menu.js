@@ -3,6 +3,12 @@
  * Chaque clic sur la page va lancer une fonction vérifiant si il faut ouvrir ou fermer le menu.
 */
 
+$('html').on('scroll touchmove mousewheel', function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	return false;
+  })
+
 function isWindowSmall(){
 	return window.matchMedia("(max-width: 660px)").matches;
 }
@@ -46,6 +52,39 @@ $(".close-pop-up").each(function(){
 	});
 });
 
+
+/*rechercher rapidement depuis favoris ou le aside*/
+
+//depuis les favoris
+$(".rechercher-fav-button").click(function(){
+	console.log("rechercher favoris");
+	var p = $(this).siblings("p");
+	var airportFrom = p.children(".travel-airport-begin").html();
+	var airportTo = p.children(".travel-airport-end").html();
+	launchFlightSearch(airportFrom, airportTo);
+});
+
+//depuis les boutons dans le aside
+$(".podium-search-button").click(function(){
+	var p = $(this).siblings(".podium_favorite");
+	var airportFrom = p.children(".trav-airport-begin").html();
+	var airportTo = p.children(".trav-airport-end").html();
+	launchFlightSearch(airportFrom, airportTo);
+})
+
+/**
+ * Va sur la page d'accueil en remplissant à l'avance les champs "aéroport départ" et "aéroport arrivée"
+ * @param {String} airportFrom le texte à mettre dans le champ "aéroport de départ"
+ * @param {String} airportTo le texte à mettre dans le champ "aéroport d'arrivée'"
+ */
+function launchFlightSearch(airportFrom, airportTo){
+	//on créé un form caché et on le poste
+	var form = $("<form action='index.php' method='GET'>" +
+		'<input type="text" name="airportFrom" value="' + airportFrom + '"/>' + 
+		'<input type="text" name="airportTo" value="' + airportTo + '"/></form>');
+		$("body").append(form);
+		form.submit();
+}
 
 /*
  * Lors du redimensionnement de la fenêtre, on vérifie si le menu est ouvert ou non afin d'éviter

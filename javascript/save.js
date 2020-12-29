@@ -64,6 +64,8 @@ $('#flights > .result').on('click', ".save-flight-button", function () {
         airline: flight.find(".result-compagny").html(),
         departureTerminal: flight.find(".result-door-begin").html(),
         arrivalTerminal: flight.find(".result-door-end").html(),
+        timetableStart: flight.find(".result-timetable-begin").html(),
+        timetableEnd: flight.find(".result-timetable-end").html()
     }
 
     console.log(flightData);

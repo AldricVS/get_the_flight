@@ -71,3 +71,8 @@ $("#search-flight-from").submit(function (e) {
         block: "start", 
     });
 });
+
+
+/**
+ * Rechercher un vol depuis la page des favoris 
+ */

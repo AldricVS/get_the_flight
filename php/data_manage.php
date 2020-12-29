@@ -32,15 +32,15 @@
         $login_already_taken = $data_reading->SelectLoginAlreadyTaken($user);
         return $login_already_taken;
     }
-    
+
     /**
-     * créer un podium des trajets favoris des utilisateurs
+     * créer un podium des trajets favoris des utilisateur 
      * @return array des 3 premiers trajets favoris 
      */
-    function PodiumFavorites($data_reading){
+    function PodiumFavorites($data_reading,$fonctions){
         $best_favorites = $data_reading->SelectBestFavorites();
         $count_favorites =$fonctions->CounterInArray($best_favorites);
-        $podium_favorites =$fonctions->PodiumInArray($count_favorites);
+        $podium_favorites = $fonctions->PodiumInArray($count_favorites);
         $departure=0;
         $arrival=1;
         for($i=0;$i<3;$i++){
@@ -48,8 +48,10 @@
             $correspondance_code_aeroport = $data_reading->SelectCorrespondOACIAirportDeparture($result[$departure]);
             $correspondance_code_aeroport_1 = $data_reading->SelectCorrespondOACIAirportArrival($result[$arrival]);
             $favorite_air_trajet[$i]="$correspondance_code_aeroport,$correspondance_code_aeroport_1";
+            $real_podium = explode(',',$favorite_air_trajet[$i]);
+            $favorite_travel[$i] = "$real_podium[0],$real_podium[3]";
         }
-        return $favorite_air_trajet;
+        return $favorite_travel;
     }
     
     /**
@@ -259,7 +261,7 @@
                 return "Sauvegarde effectuée";
             }
             else if($travel_exist!=null){
-                $vol_exist = $data_reading->SelectVolExist($travel_exist);
+                $vol_exist = $data_reading->SelectVolExistV2($travel_exist, $details_vol);
                 if ($vol_exist==null){
                     $details_vol['id_trajet'] = $travel_exist;
                     $data_saving->InsertFlight($details_vol);

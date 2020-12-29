@@ -96,6 +96,25 @@
         }
 
         /**
+         * récupère si le vol existe déjà
+         * @return int null si le vol n'existe pas renvoie null, sinon renvoie numero_vol
+         */
+        public function SelectVolExistV2($trajet, $details_vol){
+            if ($stmt = $this->_db_connection->prepare("SELECT numero_vol FROM Vol 
+                WHERE id_trajet = ? and date_depart = ? and date_arrivee = ? and compagnie = ?")) {
+                $stmt->bind_param('ssss', $trajet, $details_vol['date_depart'], $details_vol['date_arrivee'], $details_vol['compagnie']);
+                $stmt->execute();
+                $stmt->bind_result($col1);
+                $row=null;
+                while ($stmt->fetch()) {
+                    $row=$col1;
+                }
+                $stmt->close();
+                return $row;
+            }
+        }
+
+        /**
          * récupère le login, mot de passe et email d'un utilisateur
          * @return string $row au format : login,mot_de_passe,email
         */
@@ -186,6 +205,7 @@
                 $nom_aeroport = $condition;
                 $stmt->execute();
                 $stmt->bind_result($col1);
+                $row = NULL;
                 while ($stmt->fetch()) {
                     $row="$col1";
                 }

@@ -17,7 +17,8 @@ session_start();
  *      $_POST["arrivalTerminal"] : terminal d'arrivé
  */
 if(isset($_SESSION["username"]) && isset($_POST["nameAirportFrom"]) && isset($_POST["nameAirportTo"]) && isset($_POST["departureDate"]) 
-    && isset($_POST["arrivalDate"]) && isset($_POST["airline"]) && isset($_POST["departureTerminal"]) && isset($_POST["arrivalTerminal"])){
+    && isset($_POST["arrivalDate"]) && isset($_POST["airline"]) && isset($_POST["departureTerminal"]) && isset($_POST["arrivalTerminal"])
+    && isset($_POST["timetableStart"]) && isset($_POST["timetableEnd"])){
 
     require_once('../php/class/data_reading.class.php');
     require_once('../php/class/data_saving.class.php');
@@ -32,9 +33,12 @@ if(isset($_SESSION["username"]) && isset($_POST["nameAirportFrom"]) && isset($_P
         "nom_aeroport_1" => $_POST["nameAirportTo"]
     );
 
+    $date_depart = restoreDateFormat($_POST["departureDate"]) . " " . $_POST["timetableStart"];
+    $date_arrivee = restoreDateFormat($_POST["arrivalDate"]) . " " . $_POST["timetableEnd"];
+
     $details_vol = array (
-        'date_depart' => restoreDateFormat($_POST["departureDate"]),
-        'date_arrivee' => restoreDateFormat($_POST["arrivalDate"]),
+        'date_depart' => $date_depart,
+        'date_arrivee' => $date_arrivee,
         'compagnie' => $_POST["airline"],
         'porte_depart' => $_POST["departureTerminal"],
         'porte_arrive' => $_POST["arrivalTerminal"]

@@ -34,6 +34,10 @@ function restoreDateFormat($date){
     }
 }
 
+/**
+ * Recupère la date d'aujourd'hui dans le format yyyy-mm-dd
+ * @return string une chaine de caractères représentant une date
+ */
 function getCurrentDate(){
-    Date
+    return date("Y-m-d");
 }

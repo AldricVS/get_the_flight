@@ -1,11 +1,13 @@
 <?php
     /**
-     * fichier servant à trier des tableaux
+     * Ce fichier sert à trier des tableaux et vérifier si des trajets ou des vols 
+     * sont mis en favoris ou sauvegardés.
      * @package @package php\class
      */
 
     /**
-     * contient plusieurs fonctions utiles pour trier des tableaux
+     * contient plusieurs fonctions utiles pour trier des tableaux et regarder
+     * si des trajets ou des vols ne sont pas déjà favoris ou sauvegardés.
      * @author Zacharie
      */
     class Fonctions{
@@ -34,21 +36,40 @@
         }
 
         /**
+         * trouve le trajet avec le maximum de favori
+         * @return string $max_row : trajet avec le nombre de favoris le plus haut
+         */
+        public function MaxFavourite($array){
+            $max_value = 0;
+            $arr_length = count($array);
+            $array_key = array_keys($array);
+            for($index = 0; $index < $arr_length; $index++){
+                $i = $array_key[$index];
+                $result = explode(',',$array[$i]);
+                if($max_value < $result[2]){
+                    $max_value = $result[2];
+                    $max_row = $array[$i];
+                }
+            }
+            return $max_row;
+        }
+
+        /**
          * fais un top 3 des trajets les plus populaires
          * @return array $podium 
          *                  top 3 des trajets les plus populaires
          */
         public function PodiumInArray($array){
-            $arr_length = count($array);
-            sort($array);
-            $y=1;
-            for($i=0;$i<$arr_length && $i<3;$i++){
-                $array[$arr_length-$y];
-                $podium[]=$array[$arr_length-$y];
-                $y++;
+            for($i=0;$i<3;$i++){
+                // Renvoi la ligne avec le max de favori
+                $max_favorite = Fonctions::MaxFavourite($array);
+                unset($array[array_search($max_favorite,$array)]);
+                $podium[]=$max_favorite;
             }
             return $podium;
         }
+
+        
 
         /**
          * vérifie si le trajet n'est pas déjà sauvegardé dans la base de données pour un utilisateur

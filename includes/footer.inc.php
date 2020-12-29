@@ -1,15 +1,8 @@
 <footer>
-	<p class="infoc">Développement Web Avancé</p>
-	<?php
-	 /*
-    	Affichage du jour de la consultation et le navigateur du visiteur
-    	*/
-	echo '<p class="infoc">'  .daymonth("fr")." - ".$heure = date("H:i")." - ".get_navigateur().   '</p><br />';
-	?>
-	<?php
-	/*
-    	Affichage de l'adresse IP du visiteur
-  		echo '<p class="infoc"> IP du visiteur : '.$_SERVER['REMOTE_ADDR'].' ---</p>';
-  	*/
-	?>
+	<ul>
+		<li><h3>Get the Flight !</h3></li>
+		<li><p>Ce site a été réalisé dans le cadre de l'UE Développement Web avancé en L3 Informatique à <a href="https://www.cyu.fr/" target="_blank" style="font-weight: bold;">CY Cergy Paris Université</a></li>
+		<li><a class ="link_footer" href="mailto:get.the.flight@gmail.com">Nous contacter</a></li>
+		<li><a href="#ancre_Haut_de_page">Haut de page</a></li>
+	</ul>
 </footer>

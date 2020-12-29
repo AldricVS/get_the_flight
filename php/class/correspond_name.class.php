@@ -10,7 +10,7 @@ require_once("data_reading.class.php");
 
 /** 
  * récupère les noms des aéroports de départ et d'arrivée, puis trouve leur code ICAO correspondant
- * @author Zacharie
+ * @author Zacharie, Thibaut
  * @var 
  */
 class CorrespondenceName
@@ -45,17 +45,21 @@ class CorrespondenceName
     /**
     * recherche le code ocai a partir des nom des aeroport
     */
-    function searchOCAI()
+    public function searchOCAI()
     {
-        //cherche dans la base de données les codes ocai correspondants aux noms de aéroprts reçus.
+        //cherche dans la base de données les codes ocai correspondants aux noms des aéroprts reçus.
         $data_reading = new DataReading();
-        $this->_code_start = $data_reading->SelectCorrespondAirportOACI($this->_aeroport_depart);
-        $this->_code_finish = $data_reading->SelectCorrespondAirportOACI($this->_aeroport_arrivee);
-
-        //verifie si on a bien les element principal pour une requete de l'api
+        if($data_reading->SelectCorrespondAirportOACI($this->_aeroport_depart) != NULL){
+            $this->_code_start = $data_reading->SelectCorrespondAirportOACI($this->_aeroport_depart);
+        }
+        if($data_reading->SelectCorrespondAirportOACI($this->_aeroport_arrivee) != NULL){
+            $this->_code_finish = $data_reading->SelectCorrespondAirportOACI($this->_aeroport_arrivee);
+        }
+        
+        //verifie si on a bien les elements principaux pour une requête de l'api
         $this->_isReady = $this->_code_start && $this->_code_finish;
 
-        //vérifie si il y a une date pour l'ajouter a la requete de l'api
+        //vérifie si il y a une date pour l'ajouter a la requête de l'api
         if(isset($this->_date) && !empty($this->_date)){
             $this->_option_Ready = true;
         }

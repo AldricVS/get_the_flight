@@ -24,16 +24,16 @@
         private $code_error;
 
         /**
-         * récupère les données de l'api pour les mettre dans 3 variables différentes, pour 
-         * la recherche de l'utilisateur, pour les favoris et les vols sauvegardés si il y en a
+         * Récupère les données de l'api pour les mettre dans 3 variables différentes, pour 
+         * la recherche de l'utilisateur, pour les favoris et les vols sauvegardés si il y en a.
          */
         public function DataStorage (){
 
             parent::RecupData();
 
-            //vérifi si on a bien les informations principal pour commencé une requete
+            //vérifie si on a bien les informations principales pour commencé une requete
             if(parent::getisReady()){
-                //vérifi si l'appel de l'api a bien fonctionner
+                //vérifie si l'appel de l'api a bien fonctionner
                 if(parent::getErrorAPI()){
 
                     $max = count($this->_data['data']);
@@ -82,7 +82,7 @@
 
 
                         /**
-                         * Données pour la recherche de l'utilisateu
+                         * Données pour la recherche de l'utilisateur
                          */
                         $this->_data_for_search[]=array( 
                             "nom_aeroport" => $airport_dep,

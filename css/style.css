@@ -30,6 +30,7 @@ body, html{
 	align-items: center;
 	color: white;
 	font-family: 'Space Grotesk', sans-serif;
+	scroll-behavior: smooth;
 }
 
 body{
@@ -120,7 +121,6 @@ a.button:hover{
 /*HEADER*/
 header{
 	background: linear-gradient(to right, var(--color-gradient-1), var(--color-gradient-2));
-	height: 60px;
 	margin-bottom: 20px;
 }
 
@@ -147,6 +147,7 @@ h1#main-title{
 	right: 10px;
 	top: 25px;
 	z-index: 1;
+	display: none;
 }
 
 #menu-icon g, #menu-icon line{
@@ -169,17 +170,32 @@ h1#main-title{
 	transform: rotate(90deg);
 }
 
+/*FOOTER*/
+footer{
+	background: linear-gradient(to right,var(--color-gradient-1), var(--color-gradient-2));
+	text-align: center;
+	padding: 20px;
+}
+
+footer ul li {
+	margin-top: 10px;
+}
+
+footer ul li a{
+	color: #c5c5c5;
+}
+
+footer ul li a:hover{
+	color:white;
+	transition: 0.25s;
+}
 /*MENU*/
 #menu{
-	transition: height 1s ease;
-	pointer-events: none;
-	overflow: hidden;
-	z-index: 1;
+	display: block;
 	color: var(--contrast-color);
+	z-index: 1;
 	padding-top: 20px;
-	position: absolute;
 	top: 60px;
-	height: 0;
 	box-sizing: border-box;
 	background: linear-gradient(to right,var(--color-gradient-1), var(--color-gradient-2));
 	width: 100%;
@@ -189,7 +205,7 @@ h1#main-title{
 	color: white;
 }
 
-#menu.menu-clicked{
+#menu{
 	pointer-events: painted;
 	visibility: visible;
 	height: 200px;
@@ -288,6 +304,10 @@ h1#main-title{
 
 .result{
 	text-shadow: var(--shadow-normal);
+}
+
+.result .col-md-4{
+	margin-bottom: 20px;
 }
 
 #suppression_pop_up_text{
@@ -419,11 +439,19 @@ option{
 }
 
 /*ASIDE*/
-aside > section{
+aside > section {
 	background-color: var(--color-gradient-2);
 	padding: 20px;
 	box-shadow: var(--shadow-normal);
 	margin-bottom: 20px;
+}
+
+aside > section > h2 {
+	margin-bottom: 25px;
+}
+
+.podium_favorite{
+	padding-bottom: 10px;
 }
 
 /*RESULTATS VOLS*/
@@ -493,6 +521,14 @@ img.logo-result{
 
 /*POUR LES SMARTPHONES ET TABLETTES*/
 @media only screen and (max-width: 660px) {
+	html{
+		overflow-x: hidden;
+	}
+
+	body{
+		position: relative;
+	}
+
 	header{
 		height: 50px;
 		margin-bottom: 20px;
@@ -505,6 +541,8 @@ img.logo-result{
 	#menu-icon{
 		right: 10px;
 		top: 20px;
+		display: block;
+		position: absolute;
 	}
 
 	h1#main-title{
@@ -514,6 +552,11 @@ img.logo-result{
 	#menu{
 		top: 50px;
 		height: 0;
+		transition: height 1s ease;
+		pointer-events: none;
+		overflow: hidden;
+		position: absolute;
+		z-index: 1;
 		background: linear-gradient(to right,var(--color-gradient-1), var(--color-gradient-2));
 		width: 100%;
 	}
@@ -524,7 +567,10 @@ img.logo-result{
 	}
 
 	#menu.menu-clicked{
-		height: 100%;
+		pointer-events: painted;
+		visibility: visible;
+		
+		height: 100vh;
 		overflow: hidden;
 	}
 
@@ -536,14 +582,14 @@ img.logo-result{
 
 	#menu > nav > ul > li{
 		width: 100%;
-		height: 50%;
-		margin-bottom: 25vh;
+		height: 50vh;
 		position: relative;
 	}
 
 	.inner-menu{
 		position: absolute;
 	}
+
 
 	main > section{
 		margin-left: 4%;
@@ -556,6 +602,14 @@ img.logo-result{
 
 	select{
 		width: 100%;
+	}
+
+	.flight_result{
+		padding: 40px;
+	}
+
+	aside{
+		margin: 20px;
 	}
 }
 
